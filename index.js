@@ -12,7 +12,7 @@ let codeBlocks;
 let mentorSocketId = null;
 
 // connect to mongoDb Atlas
-const client = new MongoClient('mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority')
+const client = new MongoClient(process.env.MONGODB_URI)
 
 async function connectToMongoDb() {
   try {
@@ -67,7 +67,7 @@ async function run(){
     });
   });
 
-  
+
   // Lobby page route
   app.get('/', (req, res) => {
     res.render('lobbyPage', { codeBlocks });
