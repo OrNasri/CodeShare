@@ -47,9 +47,11 @@
   <body>
     <h1>Choose Code Block</h1>
     <ul>
+      <% if (typeof(codeBlocks) !== 'undefined') { %>
       <% codeBlocks.forEach(codeBlock => { %>
         <li><a href="/codeblock/<%= codeBlock.title %>"><%= codeBlock.title %></a></li>
       <% }); %>
+      <% } %>
     </ul>
   </body>
 </html>
