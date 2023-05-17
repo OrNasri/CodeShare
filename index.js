@@ -25,6 +25,27 @@ async function connectToMongoDb() {
 async function run(){
   var db = await connectToMongoDb();
   var blocks = await getCodeBlocks();
+  // Lobby page route
+  app.get('/', (req, res) => {
+    res.render('lobbyPage', { codeBlocks });
+  });
+  // Code block page route
+  app.get('/codeblock/:title', (req, res) => {
+      const codeBlockTitle = req.params.title;
+      const codeBlock = codeBlocks.find(block => block.title === codeBlockTitle);
+    
+      if (!codeBlock) {
+        return res.status(404).send('Code block not found');
+      }
+    // Check if mentor query parameter is present and set to true
+      const isMentor = req.query.mentor === 'true';
+      res.render('codeblock', { codeBlock, isMentor, codeBlockTitle });
+    });
+
+
+  http.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 }
 
 run();
@@ -84,25 +105,26 @@ io.on('connection', socket => {
   });
 
 
-  // Lobby page route
-  app.get('/', (req, res) => {
-    res.render('lobbyPage', { codeBlocks });
-  });
-  // Code block page route
-  app.get('/codeblock/:title', (req, res) => {
-      const codeBlockTitle = req.params.title;
-      const codeBlock = codeBlocks.find(block => block.title === codeBlockTitle);
-    
-      if (!codeBlock) {
-        return res.status(404).send('Code block not found');
-      }
-    // Check if mentor query parameter is present and set to true
-      const isMentor = req.query.mentor === 'true';
-      res.render('codeblock', { codeBlock, isMentor, codeBlockTitle });
-    });
+// // Lobby page route
+// app.get('/', (req, res) => {
+//   res.render('lobbyPage', { codeBlocks });
+// });
+
+// // Code block page route
+// app.get('/codeblock/:title', (req, res) => {
+//     const codeBlockTitle = req.params.title;
+//     const codeBlock = codeBlocks.find(block => block.title === codeBlockTitle);
+  
+//     if (!codeBlock) {
+//       return res.status(404).send('Code block not found');
+//     }
+//   // Check if mentor query parameter is present and set to true
+//     const isMentor = req.query.mentor === 'true';
+//     res.render('codeblock', { codeBlock, isMentor, codeBlockTitle });
+//   });
 
 
-  http.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
+// http.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
