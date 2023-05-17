@@ -23,8 +23,8 @@ async function connectToMongoDb() {
   } 
 }
 async function run(){
-  // var db = await connectToMongoDb();
-  // var temp = await getCodeBlocks();
+  var db = await connectToMongoDb();
+  var temp = await getCodeBlocks();
 
   io.on('connection', socket => {
     // When a client joins the room
