@@ -7,7 +7,7 @@ const port = 3000;
 const { MongoClient } = require('mongodb');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-
+app.set('views', __dirname + '/views');
 let codeBlocks;
 let mentorSocketId = null;
 
