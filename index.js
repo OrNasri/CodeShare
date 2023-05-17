@@ -23,8 +23,8 @@ async function connectToMongoDb() {
   } 
 }
 async function run(){
-  var db = await connectToMongoDb();
-  var temp = await getCodeBlocks();
+  // var db = await connectToMongoDb();
+  // var temp = await getCodeBlocks();
 
   io.on('connection', socket => {
     // When a client joins the room
@@ -66,7 +66,7 @@ async function run(){
       }
     });
   });
-  
+
   // Lobby page route
   app.get('/', (req, res) => {
     res.render('lobbyPage', { codeBlocks });
