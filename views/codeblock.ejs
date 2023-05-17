@@ -65,18 +65,16 @@
      
       document.addEventListener('DOMContentLoaded', () => {
         const codeInput = document.getElementById('codeInput');
-         // Retrieve the codeBlock title from the template
-        const codeBlockTitle = '<%= codeBlock.title %>';
+        const codeBlockTitle = '<%= codeBlock.title %>'; // Retrieve the codeBlock title from the template
         if (codeInput) {
           codeInput.addEventListener('input', event => {
             const code = event.target.value;
-             // Pass codeBlockTitle as a parameter
-            socket.emit('codeChange', { code, codeBlockTitle, isMentor: false });
+            socket.emit('codeChange', { code, codeBlockTitle, isMentor: false }); // Pass codeBlockTitle as a parameter
           });
         }
       });
-// Emit the 'isMentor' value from the server to the client
-        socket.emit('isMentor', '<%= isMentor %>'); 
+
+        socket.emit('isMentor', '<%= isMentor %>'); // Emit the 'isMentor' value from the server to the client
         </script>
 
         <% if (isMentor) { %>

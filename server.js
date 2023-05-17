@@ -23,10 +23,9 @@ async function connectToMongoDb() {
   } 
 }
 async function run(){
-  var a = await connectToMongoDb();
+  var db = await connectToMongoDb();
+  var temp = await getCodeBlocks();
 }
-
-run();
 
 async function getCodeBlocks() {
   try {
@@ -39,7 +38,7 @@ async function getCodeBlocks() {
   }
 }
 
-getCodeBlocks();
+
 
 io.on('connection', socket => {
     // When a client joins the room
@@ -48,12 +47,10 @@ io.on('connection', socket => {
       if (mentorSocketId === null) {
         mentorSocketId = socket.id;
         socket.emit('isMentor', true);
-        // Store the isMentor value in socket's custom data field
-        socket.data.isMentor = true; 
+        socket.data.isMentor = true; // Store the isMentor value in socket's custom data field
       } else {
         socket.emit('isMentor', false);
-        // Store the isMentor value in socket's custom data field
-        socket.data.isMentor = false; 
+        socket.data.isMentor = false; // Store the isMentor value in socket's custom data field
       }
     });
     
@@ -62,10 +59,10 @@ io.on('connection', socket => {
         socket.broadcast.emit('codeChange', data);
         if (!socket.data.isMentor) {
           try {
-            // Access the codeBlockTitle from the data object
-            const codeBlockTitle = data.codeBlockTitle; 
+            const codeBlockTitle = data.codeBlockTitle; // Access the codeBlockTitle from the data object
             const db = client.db('codeBlocks');
             const collection = db.collection('codeBlocks');
+      
             // Update the code block in the database
             await collection.updateOne(
               { title: codeBlockTitle },
@@ -103,6 +100,7 @@ app.get('/codeblock/:title', (req, res) => {
   });
 
 
-http.listen(port, () => {
+http.listen(port, async () => {
+  var r = await run();
   console.log(`Server is running on port ${port}`);
 });
