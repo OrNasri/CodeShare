@@ -65,25 +65,25 @@
      
       document.addEventListener('DOMContentLoaded', () => {
         const codeInput = document.getElementById('codeInput');
-        const codeBlockTitle = '<%= codeBlock.title %>'; // Retrieve the codeBlock title from the template
+         // Retrieve the codeBlock title from the template
+        const codeBlockTitle = '<%= codeBlock.title %>';
         if (codeInput) {
           codeInput.addEventListener('input', event => {
             const code = event.target.value;
-            socket.emit('codeChange', { code, codeBlockTitle, isMentor: false }); // Pass codeBlockTitle as a parameter
+             // Pass codeBlockTitle as a parameter
+            socket.emit('codeChange', { code, codeBlockTitle, isMentor: false });
           });
         }
       });
-
-        socket.emit('isMentor', '<%= isMentor %>'); // Emit the 'isMentor' value from the server to the client
+// Emit the 'isMentor' value from the server to the client
+        socket.emit('isMentor', '<%= isMentor %>'); 
         </script>
 
         <% if (isMentor) { %>
             <div class="mentor-message">
-              <!-- <p>You are the mentor. This code block is read-only.</p> -->
             </div>
           <% } else { %>
             <div>
-              <!-- <p>You are a student. You can edit the code block:</p> -->
               <textarea id="codeInput" rows="10" cols="50"><%= codeBlock.code %></textarea>
             </div>
         <% } %>

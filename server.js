@@ -48,10 +48,12 @@ io.on('connection', socket => {
       if (mentorSocketId === null) {
         mentorSocketId = socket.id;
         socket.emit('isMentor', true);
-        socket.data.isMentor = true; // Store the isMentor value in socket's custom data field
+        // Store the isMentor value in socket's custom data field
+        socket.data.isMentor = true; 
       } else {
         socket.emit('isMentor', false);
-        socket.data.isMentor = false; // Store the isMentor value in socket's custom data field
+        // Store the isMentor value in socket's custom data field
+        socket.data.isMentor = false; 
       }
     });
     
@@ -60,10 +62,10 @@ io.on('connection', socket => {
         socket.broadcast.emit('codeChange', data);
         if (!socket.data.isMentor) {
           try {
-            const codeBlockTitle = data.codeBlockTitle; // Access the codeBlockTitle from the data object
+            // Access the codeBlockTitle from the data object
+            const codeBlockTitle = data.codeBlockTitle; 
             const db = client.db('codeBlocks');
             const collection = db.collection('codeBlocks');
-      
             // Update the code block in the database
             await collection.updateOne(
               { title: codeBlockTitle },
