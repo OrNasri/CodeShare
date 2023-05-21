@@ -8,10 +8,9 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 app.use(express.static('public'));
-app.set('views', `${__dirname}/views`);
-app.use(express.static(`${__dirname}/public`));
+app.set('views', './views');
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+
 
 let codeBlocks;
 let mentorSocketId = null;
