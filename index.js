@@ -8,7 +8,7 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 app.use(express.static('public'));
-app.set('views', __dirname + '/views/');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 
@@ -75,7 +75,7 @@ async function initialize(){
   
   // Lobby page route
   app.get('/', (req, res) => {
-    res.render('lobbypage', { codeBlocks });
+    res.render('./views/lobbypage', { codeBlocks });
   });
   // Code block page route
   app.get('/codeblock/:title', (req, res) => {
