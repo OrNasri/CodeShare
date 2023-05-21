@@ -14,9 +14,7 @@ let codeBlocks;
 let mentorSocketId = null;
 // 'mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority'
 // connect to mongoDb Atlas
-const client =  new MongoClient(process.env.MONGODB_URI)
-// new MongoClient('mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority')
-// ||
+const client =  new MongoClient('mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority')
 
 
 async function connectToMongoDb() {
