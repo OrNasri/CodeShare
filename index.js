@@ -3,12 +3,12 @@ const app = express();
 // const http = require('http').Server(app);
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 app.use(express.static('public'));
-app.set('views', './views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 
@@ -72,6 +72,7 @@ async function initialize(){
     });
   });
 
+  
   // Lobby page route
   app.get('/', (req, res) => {
     res.render('lobbypage', { codeBlocks });
