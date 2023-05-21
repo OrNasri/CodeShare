@@ -1,17 +1,23 @@
 const express = require('express');
 const app = express();
 // const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const port = process.env.PORT;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const port = process.env.PORT || 3000;
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 let codeBlocks;
 let mentorSocketId = null;
-'mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority'
+// 'mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority'
 // connect to mongoDb Atlas
-const client = new MongoClient(process.env.MONGODB_URI)
+const client =  new MongoClient(process.env.MONGODB_URI)
+// new MongoClient('mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority')
+// ||
+
 
 async function connectToMongoDb() {
   try {
@@ -85,7 +91,7 @@ async function initialize(){
     });
 
 
-  http.listen(port, () => {
+  server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
 }
