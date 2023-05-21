@@ -72,7 +72,6 @@ async function initialize(){
     });
   });
 
-  
   // Lobby page route
   app.get('/', (req, res) => {
     res.render('lobbypage', { codeBlocks });
