@@ -8,7 +8,7 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 app.use(express.static('public'));
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/views/');
 app.set('view engine', 'ejs');
 
 
