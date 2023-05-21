@@ -7,9 +7,9 @@ const port = process.env.PORT || 3000;
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-app.set('view engine', 'ejs');
 app.use(express.static('public'));
-app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '\\views');
 
 let codeBlocks;
 let mentorSocketId = null;
