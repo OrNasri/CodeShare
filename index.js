@@ -6,6 +6,9 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const port = process.env.PORT;
 const { MongoClient } = require('mongodb');
+
+const fs = require('fs');
+
 require('dotenv').config();
 
 app.use(express.static('public'));
@@ -94,8 +97,31 @@ async function initialize(){
 
 
   server.listen(port, () => {
+    fs.readdir(__dirname+'/views', (err, files) => {
+      if (err) {
+        console.error('Error reading directory:', err);
+        return;
+      }
+    
+      // Print the file names
+      files.forEach((file) => {
+        console.log(file);
+      });
+    });
+    fs.readdir(__dirname, (err, files) => {
+      if (err) {
+        console.error('Error reading directory:', err);
+        return;
+      }
+    
+      // Print the file names
+      files.forEach((file) => {
+        console.log(file);
+      });
+    });
     console.log(`Server is running on port ${port}`);
   });
+  
 }
 
 initialize();
