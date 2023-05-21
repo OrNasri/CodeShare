@@ -10,6 +10,7 @@ require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.set('views', __dirname + '/views');
+
 let codeBlocks;
 let mentorSocketId = null;
 
