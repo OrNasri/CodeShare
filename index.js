@@ -74,6 +74,7 @@ async function initialize(){
   
   // Lobby page route
   app.get('/', (req, res) => {
+    console.log(__dirname+'/views/lobbypage')
     res.render(__dirname+'/views/lobbypage', { codeBlocks });
   });
   // Code block page route
