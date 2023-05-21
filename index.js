@@ -1,18 +1,17 @@
 const express = require('express');
-const { connect } = require('http2');
 const app = express();
-const http = require('http').Server(app);
+// const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const port = 3000;
+const port = process.env.PORT;
 const { MongoClient } = require('mongodb');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 let codeBlocks;
 let mentorSocketId = null;
-
+'mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority'
 // connect to mongoDb Atlas
-const client = new MongoClient('mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority')
+const client = new MongoClient(process.env.MONGODB_URI)
 
 async function connectToMongoDb() {
   try {
@@ -22,7 +21,7 @@ async function connectToMongoDb() {
     console.log(e)
   } 
 }
-async function run(){
+async function initialize(){
   var db = await connectToMongoDb();
   var blocks = await getCodeBlocks();
 
@@ -70,7 +69,7 @@ async function run(){
   
   // Lobby page route
   app.get('/', (req, res) => {
-    res.render('lobbyPage', { codeBlocks });
+    res.render('lobbypage', { codeBlocks });
   });
   // Code block page route
   app.get('/codeblock/:title', (req, res) => {
@@ -91,7 +90,7 @@ async function run(){
   });
 }
 
-run();
+initialize();
 
 async function getCodeBlocks() {
   try {
