@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 let codeBlocks;
 let mentorSocketId = null;
-// 'mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority'
+
 // connect to mongoDb Atlas
 const client =  new MongoClient('mongodb+srv://or:Aa12345678@cluster0.wpc3d0s.mongodb.net/?retryWrites=true&w=majority')
 
