@@ -26,6 +26,17 @@ async function connectToMongoDb() {
   } 
 }
 
+async function getCodeBlocks() {
+  try {
+    const db = client.db('codeBlocks');
+    const collection = db.collection('codeBlocks');
+    // Retrieve all the code blocks from the database
+    codeBlocks = await collection.find({}).toArray();
+  } catch (error) {
+    console.error('Failed to retrieve code blocks from the database:', error);
+  }
+}
+
 async function initializeDatabase(){
   var db = await connectToMongoDb();
   var blocks = await getCodeBlocks();
@@ -93,13 +104,3 @@ async function initializeDatabase(){
 
 initializeDatabase();
 
-async function getCodeBlocks() {
-  try {
-    const db = client.db('codeBlocks');
-    const collection = db.collection('codeBlocks');
-    // Retrieve all the code blocks from the database
-    codeBlocks = await collection.find({}).toArray();
-  } catch (error) {
-    console.error('Failed to retrieve code blocks from the database:', error);
-  }
-}
